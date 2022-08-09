@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>ajax乱码问题</title>
+</head>
+<body>
+<h1 style="text-align: center">ajax乱码问题</h1>
+<h2 style="text-align: center">tomcat9及之前的版本，中文会有乱码，服务端响应需要声明字符集类型</h2>
+<h2 style="text-align: center">对于get的返回，先声明<font color="red">response.setContentType("text/xml;charset=utf-8");</font>，再写入</h2>
+<h2 style="text-align: center">对于post获取数据时，需要先对字符集声明<font color="red">request.setCharacterEncoding("UTF-8")</font></h2>
+
+</body>
+</html>

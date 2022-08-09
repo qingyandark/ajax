@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ajax get请求</title>
+</head>
+<body>
+<h1 style="text-align: center">ajax get请求的缓存问题（低版本浏览器（IE），现代浏览器大部分没有），POST没有缓存问题</h1>
+<h2 style="text-align: center">实际上就是本地缓存，提高体验。但是不能事实获取最新的资源，需要自己手动</h2>
+<h2 style="text-align: center">对ajax来说，同路径的ajax请求直接从缓存里拿</h2>
+<h2 style="text-align: center">
+    get请求，及第二次get请求会有缓存
+</h2>
+<h2 style="text-align: center">
+    解决：在请求路径后面加一个时间戳，由于每次都变化，所以不会被缓存
+</h2>
+<h4 style="text-align: center">
+    xhr.open("GET", "/2-ajax/request2?username="+username+"&password="+password+"&time="+<font style="color: red">new Date().getTime()</font>, true)
+</h4>
+
+</body>
+</html>

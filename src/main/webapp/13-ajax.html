@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>测试自己写的jQuery ajax get请求</title>
+</head>
+<body>
+<h1 style="text-align: center">测试自己写的jQuery ajax get请求</h1>
+
+<script type="application/javascript" src="js/jQuery.js"></script>
+
+<script type="application/javascript">
+    $(function (){
+        $("#btn").click(function (){
+            console.log("get")
+            $.ajax({
+                //
+                type: "GET",
+                url: "/2-ajax/request10",
+                data: "username=" + $("#username").val(),
+                async: true,
+
+                // 程序响应数据解析
+                success: function (json){
+                    console.log(json)
+                    $("#mydiv").html(json.username)
+                }
+            })
+        })
+        $("#btn2").click(function (){
+            console.log("post")
+            $.ajax({
+                //
+                type: "POST",
+                url: "/2-ajax/request10",
+                data: "username=" + $("#username").val(),
+                async: true,
+
+                // 程序响应数据解析
+                success: function (json){
+                    console.log(json)
+                    $("#mydiv").html(json.username)
+                }
+            })
+        })
+    })
+    // $(function (){
+    //     $("#btn2").click(function (){
+    //         console.log("post")
+    //         $.ajax({
+    //             //
+    //             type: "POST",
+    //             url: "/2-ajax/request10",
+    //             data: "username=" + $("#username").val(),
+    //             async: true,
+    //
+    //             // 程序响应数据解析
+    //             success: function (json){
+    //                 console.log(json)
+    //                 $("#mydiv").html(json.username)
+    //             }
+    //         })
+    //     })
+    // })
+</script>
+
+<button id="btn">ajax get请求</button>
+<button id="btn2">ajax post请求</button>
+<div id="mydiv"></div>
+</br>
+用户名<input type="text" id="username">
+
+
+</body>
+</html>

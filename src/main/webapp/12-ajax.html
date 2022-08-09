@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>封装ajax入jQuery</title>
+</head>
+<body>
+<h1 style="text-align: center">封装ajax入jQuery</h1>
+
+<script type="application/javascript" src="js/jQuery.js"></script>
+
+<script type="application/javascript">
+    $(function (){
+        $("#btn").click(function (){
+            $.ajax({
+                //
+                type: "POST",
+                url: "/2-ajax/request9",
+                data: "username=" + $("#username").val(),
+                async: true,
+
+                // 程序响应数据解析
+                success: function (json){
+                    document.getElementById("mydiv").innerHTML = json.username
+                    $("#mydiv").html(json.username)
+                }
+            })
+        })
+    })
+</script>
+
+<button id="btn">ajax请求</button>
+<div id="mydiv"></div>
+</br>
+用户名<input type="text" id="username">
+
+</body>
+</html>

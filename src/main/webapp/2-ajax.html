@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ajax get请求</title>
+</head>
+<body>
+<h1 style="text-align: center">ajax get请求数据如何提交给服务器</h1>
+<!--用户点击按钮发送ajax请求-->
+
+<input type="button" value="ajax1" id="btn"></br>
+<script type="application/javascript">
+    window.onload = function(){
+        document.getElementById("btn").onclick = function(){
+            var xhr = new XMLHttpRequest();
+
+            xhr.onreadystatechange = function (){
+                if(this.readyState  == 4){
+                    if(this.status == 200){
+                        document.getElementById("mydiv").innerHTML = this.responseText;
+                    }
+                }
+            }
+            var username = document.getElementById("username").value
+            var password = document.getElementById("password").value
+            xhr.open("GET", "/2-ajax/request2?username="+username+"&password="+password+"", true)
+            xhr.send()
+        }
+    }
+</script>
+username<input type="text" id="username"></br>
+password<input type="text" id="password"></br>
+<div id = "mydiv"></div>
+
+</body>
+</html>

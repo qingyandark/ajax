@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ajax post请求，失去焦点自动查询，用户名是否可用</title>
+</head>
+<body>
+<h1 style="text-align: center">发送Post请求，失去焦点自动查询，用户名是否可用</h1>
+<button id="btn">发送Post请求</button></br>
+
+<script type="application/javascript">
+    window.onload = function (){
+        document.getElementById("btn").onclick = function (){
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function (){
+                if(this.readyState == 4){
+                    if(this.status == 200){
+                        document.getElementById("mydiv").innerHTML = this.responseText;
+                    }
+                    else{
+                        alert(this.status)
+                    }
+                }
+            }
+            xhr.open("POST", "/2-ajax/request3", true);
+            // 设置请求头,必须在open之后
+            // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+            // 放到send()函数里面的数据，会自动在请求体当中提交数据
+            var username = document.getElementById("username").value
+            var password = document.getElementById("password").value
+            xhr.send("username="+username+"&password="+password);
+        }
+    }
+</script>
+用户名<input type="text" id="username"></br>
+<script type="application/javascript">
+    window.onload = function(){
+        document.getElementById("username").onblur = function(){
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function(){
+                if(this.readyState == 4) {
+                    if (this.status == 200) {
+                        if(this.responseText == "true"){
+                            document.getElementById("mydiv").innerHTML = "用户已存在";
+                        }
+                        else{
+                            document.getElementById("mydiv").innerHTML = "用户不存在";
+                        }
+                    }
+                    else{
+                        alert(this.status)
+                    }
+                }
+            }
+            xhr.open("POST", "/2-ajax/request4", true);
+            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+            xhr.send("username="+document.getElementById("username").value);
+        }
+
+        document.getElementById("username").onfocus = function(){
+            document.getElementById("mydiv").innerHTML = "";
+        }
+    }
+</script>
+密码<input type="text" id="password"></br>
+<div id="mydiv"></div>
+
+</body>
+</html>

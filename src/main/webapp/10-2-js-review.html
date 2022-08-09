@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>回顾JS</title>
+</head>
+<body>
+<h1 style="text-align: center">回顾JS</h1>
+
+<button id="btn">jQuery</button>
+<div id="div"></div>
+
+<script type="application/javascript">
+    function User(usercode, username){
+    // User = function (usercode, username){
+        // 属性
+        this.usercode = usercode;
+        this.username = username;
+        //方法，实例，通过对象调用
+        this.dosome = function (){
+            console.log(username + " doSome..")
+        }
+        // 静态方法
+        User.doOther = function (){
+            console.log("user doOther..")
+        }
+    }
+    // 创建对象
+
+    // User() 直接这样调用，表明你把他当成普通函数，不会创建对象，堆中没有这个对象
+    // new User()：调用该类的构造方法，创建对象，并在堆中分配空间
+    var user = new User("111", "zhangsan");
+    // 调用属性
+    alert(user.usercode + ", " + user.username)
+    // 调用实例方法
+    user.dosome()
+    // 调用静态方法，虽然是静态方法，但是必须先new才行s
+    User.doOther();
+
+    // 后期如果想给某给类型扩展方法，还可以使用prototype属性
+    User.prototype.print = function (){
+        console.log("print .....")
+    }
+    User.prototype.getUsername = function(){
+        console.log(user.username)
+    }
+
+    // 调用扩展方法
+    user.print()
+    user.getUsername();
+
+    //
+
+</script>
+
+</body>
+</html>

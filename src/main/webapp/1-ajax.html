@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ajax get请求</title>
+</head>
+<body>
+<h1 style="text-align: center">ajax get请求</h1>
+<!--用户点击按钮发送ajax请求-->
+
+<input type="button" value="ajax1" id="btn">
+<script type="application/javascript">
+    window.onload = function(){
+        document.getElementById("btn").onclick = function(){
+            console.log("发送ajax get请求")
+            // 创建AJAX核心对象XMLHttpRequset
+            var xhr = new XMLHttpRequest();
+
+            // 注册回调函数
+            xhr.onreadystatechange = function (){
+                console.log(xhr.readyState);
+                // 状态码=4 表示响应结束
+                // 一般会有一个HTTP状态码 xhr.status
+                // 200成功, 404资源找不到, 500服务器内部错误
+                if(this.readyState  == 4){
+                    console.log("end2")
+                    console.log(this.status)
+                    if(this.status == 404){
+                        alert("资源不存在")
+                    }
+                    else if(this.status == 500){
+                        alert("服务器炸了")
+                    }
+                    else if(this.status == 200){
+                        alert("成功")
+                        // innerHTML 将后面的内容当作HTML代码执行
+                        document.getElementById("mydiv").innerHTML = this.responseText;
+                    }
+                }
+            }
+
+            // 开启通道
+            // open(method, url, async, user, psw)
+            // method: 请求方式,get,post,...
+            // url: 请求路径
+            // async: true | false, true 异步, 大部分都是true
+            // user: 用户名
+            // pwd: 密码
+            // user & pwd 身份认证，访问服务需要口令，看服务器需不需要
+            xhr.open("GET", "/2-ajax/request1", true)
+
+            // 发送请求
+            xhr.send()
+
+        }
+    }
+</script>
+
+<div id = "mydiv"></div>
+
+</body>
+</html>

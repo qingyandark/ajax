@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>省市联动</title>
+</head>
+<body style="text-align: center">
+<h1>省市联动</h1>
+
+<script type="application/javascript" src="js/jQuery.js"></script>
+
+<div style="text-align: center">
+    <select id="province">
+        <option value="">--请选择省份--</option>
+<!--        <option value="1">河南</option>-->
+    </select>
+    <select id="city">
+    </select>
+</div>
+<script type="application/javascript">
+    $(function (){
+        $.ajax({
+            //
+            type: "GET",
+            url: "/2-ajax/request11-province",
+            data: "t="+new Date().getTime(),
+            async: true,
+
+            // 程序响应数据解析
+            success: function (json){
+                console.log(json)
+                var html = "<option value=\"\">--请选择省份--</option>"
+                for (let i = 0; i < json.length; i++) {
+                    html+="<option value=\"" + json[i].code + "\">" + json[i].name + "</option>"
+                }
+                $("#province").html(html)
+            }
+        })
+
+        $("#province").change(function (){
+            $.ajax({
+                //
+                type: "GET",
+                url: "/2-ajax/request12-city?",
+                data: "t="+new Date().getTime() +"&code="+this.value,
+                async: true,
+
+                // 程序响应数据解析
+                success: function (json){
+                    console.log(json)
+                    var html = "<option value=\"\">--请选择城市--</option>"
+                    for (let i = 0; i < json.length; i++) {
+                        html+="<option value=\"" + json[i].code + "\">" + json[i].name + "</option>"
+                    }
+                    $("#city").html(html)
+                }
+            })
+        })
+    })
+</script>
+
+</body>
+</html>

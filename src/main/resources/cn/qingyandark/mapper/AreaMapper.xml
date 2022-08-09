@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.qingyandark.mapper.AreaMapper">
+    <select id="selectProvince" resultType="cn.qingyandark.pojo.Area">
+        select * from tb_area where pcode is NULL;
+    </select>
+
+    <select id="selectCity" resultType="cn.qingyandark.pojo.Area">
+        select * from tb_area where pcode = #{provinceCode};
+    </select>
+</mapper>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>XML数据交换</title>
+</head>
+<body>
+<h1 style="text-align: center">XML数据交换</h1>
+<input type="button" id="btn" value="XML数据交换">
+<script type="application/javascript">
+    window.onload = function(){
+        document.getElementById("btn").onclick = function(){
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function(){
+                if(this.readyState == 4) {
+                    if (this.status == 200) {
+                        var xml = this.responseXML;
+                        console.log(xml)
+                        var stus = xml.getElementsByTagName("student");
+                        console.log(stus[0].nodeName)
+                        for (let i = 0; i < stus.length; i++) {
+                            var stu = stus[i];
+                            var tags = stu.childNodes;
+                            for (let j = 0; j < tags.length; j++) {
+                                var son = tags[j];
+                                if(son.nodeName == "name"){
+                                    console.log("name = "+son.textContent)
+                                }
+                                if(son.nodeName == "age"){
+                                    console.log("age = "+son.textContent)
+                                }
+                            }
+                        }
+                    }
+                    else{
+                        alert(this.status)
+                    }
+                }
+            }
+            xhr.open("GET", "/2-ajax/request6", true);
+            xhr.send();
+        }
+    }
+</script>
+<div id="mydiv"></div>
+
+</body>
+</html>

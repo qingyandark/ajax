@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>ajax的同步和异步</title>
+</head>
+<body>
+<h1 style="text-align: center">ajax的同步和异步</h1>
+<h2 style="text-align: center">
+    xhr.open("get", "url", false);</br>
+    同步：其他ajax请求需要等这个请求结束后才可以发送（直接点不了）</br>
+    何时使用：比如说用户注册，要先等 用户名验证的ajax请求返回后，我才能注册，否则可能注册非法数据
+</h2>
+<h2 style="text-align: center">
+    xhr.open("get", "url", true);</br>
+    异步：不影响其他ajax请求的发送，其他ajax请求可以直接发送</br>
+    何时使用：大部分是异步请求
+</h2>
+
+<button id="btn1">ajax异步</button>
+<div id="div1"></div>
+</br>
+<button id="btn2">ajax同步</button>
+<div id="div2"></div>
+
+<script type="application/javascript">
+    window.onload = function(){
+        document.getElementById("btn1").onclick = function(){
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function(){
+                if(this.readyState == 4) {
+                    if (this.status == 200) {
+                        document.getElementById("div1").innerHTML = this.responseText;
+                    }
+                    else{
+                        alert(this.status)
+                    }
+                }
+            }
+            xhr.open("GET", "/2-ajax/request7", true);
+            xhr.send();
+        }
+        document.getElementById("btn2").onclick = function(){
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function(){
+                if(this.readyState == 4) {
+                    if (this.status == 200) {
+                        document.getElementById("div2").innerHTML = this.responseText;
+                    }
+                    else{
+                        alert(this.status)
+                    }
+                }
+            }
+            xhr.open("GET", "/2-ajax/request8", false);
+            xhr.send();
+        }
+    }
+</script>
+
+</body>
+</html>
